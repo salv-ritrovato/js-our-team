@@ -41,25 +41,34 @@ const teamMembers = [
 ];
 
 // Prelevo il nodo del DOM del container che conterrà le nostre card
-const cardContainer = document.getElementById("container");
+const cardContainer = document.getElementById("content");
 
 // Creo una variabile con stringa vuota dove poter accumulare tutte le card che andrò a generare
 let teamElements = "";
 
-// ciclo for
+// For cycle per ciclare fra tutti gli elementi dell'array di oggetti
 for (let i = 0; i < teamMembers.length; i++) {
     const keys = teamMembers[i];
-    console.log(keys); // da rimuovere
+    console.log(keys);
+    // Decompongo un singolo componente dell'array di oggetti
     const {name, role, email, img} = keys;
     console.log(name, role, email, img);
-    // html dinamico
-    const dynamicHTML = `<img src="${img}" class="card-img-top" alt="...">
-                        <h5 class="member-name">${name}</h5>
-                        <p class="role">${role}</p>
-                        <p class="mail">${email}</p>
+    // Genero markup/html dinamico per ogni card di cui ho bisogno
+    const dynamicHTML = `
+                        <div class="col-12 col-sm-6 col-md-4 mb-4 d-flex justify-content-center">
+                          <div class="card" style="width: 18rem;">
+                          <img src="${img}" class="card-img-top" alt="${name}">
+                            <div class="card-body text-center">
+                            <h5 class="card-title">${name}</h5>
+                            <p class="card-text">${role}</p>
+                            <p class="mail">${email}</p>
+                            </div>
+                          </div>
+                        </div>
                         `;
     teamElements += dynamicHTML;
 }
 
+// Inserisco tutte le card generate nel DOM in un'unica operazione
 cardContainer.innerHTML = teamElements;
 
